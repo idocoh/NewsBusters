@@ -1,0 +1,33 @@
+import nltk
+from newspaper import Article
+import pandas as pd
+
+
+df = pd.read_csv('/Users/AmitKochavi/Desktop/Projects/HackMafaat/BuzzFeed News- Fake News 50.csv')
+saved_column = df.URL
+numbersArticles=list(range(0,50))
+
+
+#f = open('file'+i+'.txt','w')
+
+#f.write('answer:'+str(a))
+#f.close()
+
+'''
+cnn_paper = newspaper.build('http://cnn.com')
+
+for article in cnn_paper.articles:
+    print(article.url)
+'''
+#nltk.download()
+for i in numbersArticles:
+
+    url = str(saved_column[i])
+    a = Article(url)
+    a.download()
+    a.parse()
+
+    file2write=open('file(%i).txt' % i,'w')
+    file2write.write("Article title: "+a.title.encode('utf-8')+ "\n Article text: "+a.text.encode('utf-8')
+                     + "\n Article authors: "+str(a.authors) + "\n Article Keywords: "+str(a.authors))
+    file2write.close()
